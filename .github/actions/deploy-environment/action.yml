@@ -19,8 +19,8 @@ runs:
     - name: Install sfdx
       shell: bash
       run: |
-        npm install --global sfdx-cli
-        sfdx --version
+        npm install @salesforce/cli --global
+        sf --version
     - name: Login to ${{ inputs.environmentName }}
       shell: bash
       run: |
