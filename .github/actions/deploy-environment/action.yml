@@ -25,7 +25,7 @@ runs:
       shell: bash
       run: |
         echo "${{ inputs.sfdx_auth_url }}"
-        sf org login sfdx-url --set-default --sfdx-url-file .\authFile.json
+        sf org login sfdx-url --set-default --sfdx-url-file <(echo "${{ inputs.sfdx_auth_url }}")
     - name: Generate package.xml
       shell: bash
       run: |
