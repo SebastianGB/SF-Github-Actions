@@ -109,7 +109,7 @@ public class Order_TriggerTest {
         // Delete the Order
         delete testOrder;
 
-         // Verify the expected behavior
+        // Verify the expected behavior
          testOpportunity  = [SELECT Id, Name, Contribution_Margin__c, GMV__c, Purchase_Price__c FROM Opportunity WHERE Id = :testOpportunity.Id];
          System.assertEquals(testOpportunity.Contribution_Margin__c, OpportunityActions.calculateContributionMargin(testOpportunity, 0), 'The CM should be set correctly.');
          
