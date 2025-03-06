@@ -29,24 +29,20 @@ public with sharing class OrderActions {
             GROUP BY OpportunityId
         ];
 
-        // Loop through the AggregateResult records
-        for (AggregateResult aggOrder : aggOrderTotalCosts) {
-            // Get the Opportunity Id from the AggregateResult
-            Id oppId = (Id) aggOrder.get('OpportunityId');
+        // Loop through the Opportunities to find their Orders and remove them
+        for (Opportunity opp: opportunitiesMap.values()) {
             
-            // Check if the Opportunity Id exists in the opportunitiesMap
-            if (opportunitiesMap.containsKey(oppId)) {
-                // Retrieve the Opportunity from the map
-                Opportunity opp = opportunitiesMap.get(oppId);
-                
-                // Get the total costs from the AggregateResult
-                Decimal totalCosts = (Decimal) aggOrder.get('totalCosts');
-        
-                // Update the Contribution Margin field using the total costs
-                opp.Contribution_Margin__c = OpportunityActions.calculateContributionMargin(opp, totalCosts);
+            Decimal totalCosts = 0;
+            // Loop through the AggregateResult records
+            for (AggregateResult aggOrder: aggOrderTotalCosts) {
+                Id oppId = (Id) aggOrder.get('OpportunityId');
+                if (opp.Id == oppId) {
+                    totalCosts = totalCosts + (Decimal) aggOrder.get('totalCosts');
+                }
             }
+            
+            opp.Contribution_Margin__c = opp.GMV__c - opp.Purchase_Price__c - totalCosts;        
         }
-        
         // Step Update the Opportunities in the map.
         if (opportunitiesMap.size() > 0) {
             // Implement company Log Solution to handle unsaved data
