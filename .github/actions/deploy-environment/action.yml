@@ -29,7 +29,7 @@ runs:
     - name: Generate package.xml
       shell: bash
       run: |
-        sfdx project generate manifest --source-dir force-app --output-dir manifest
+        sf project generate manifest --source-dir force-app --output-dir manifest
     - name: Deploy to ${{ inputs.environmentName }}
       shell: bash
       run: |
@@ -42,4 +42,4 @@ runs:
         if [ "${{ inputs.validateOnly }}" = "true" ]; then
           deployFlags+=( --dry-run )
         fi
-        sfdx project deploy start "${deployFlags[@]}"
+        sf project deploy start "${deployFlags[@]}"
