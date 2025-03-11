@@ -43,7 +43,7 @@ public with sharing class OrderActions {
             
             opp.Contribution_Margin__c = opp.GMV__c - opp.Purchase_Price__c - totalCosts;        
         }
-        // Step Update the Opportunities in the map.
+        // Update the Opportunities in the map.
         if (opportunitiesMap.size() > 0) {
             // Implement company Log Solution to handle unsaved data
             List<Database.SaveResult> updatedOpportunities = Database.update(opportunitiesMap.values(), false);

@@ -18,7 +18,7 @@ jobs:
           sf --version
       - name: Login To Org
         run: |
-          sf org login sfdx-url --set-default --sfdx-url-file <(echo "${{ inputs.sfdx_auth_url }}")
+          sf org login sfdx-url --set-default --sfdx-url-file <(echo "${{ secrets.SFDX_AUTH_URL_PRODUCTION }}")
       - name: Run Test Classes
         run: |
           sf apex run test -l RunLocalTests -w 15
