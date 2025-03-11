@@ -18,7 +18,7 @@ public with sharing class OrderActions {
             }
         }
         
-        // Step Query the Opportunities with the Contribution_Margin__c, GMV__c, and Purchase_Price__c fields.
+        // Query the Opportunities with the Contribution_Margin__c, GMV__c, and Purchase_Price__c fields.
         Map<Id, Opportunity> opportunitiesMap = new Map<Id, Opportunity> ([SELECT Id, Contribution_Margin__c, GMV__c, Purchase_Price__c FROM Opportunity WHERE Id IN :opportunityIds]);
 
         // Query the opportunities and related orders
