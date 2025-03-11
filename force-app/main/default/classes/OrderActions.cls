@@ -29,7 +29,7 @@ public with sharing class OrderActions {
             GROUP BY OpportunityId
         ];
 
-        // Loop through the Opportunities to find their Orders and remove them
+        // Loop through the Opportunities to find their Orders
         for (Opportunity opp: opportunitiesMap.values()) {
             
             Decimal totalCosts = 0;
